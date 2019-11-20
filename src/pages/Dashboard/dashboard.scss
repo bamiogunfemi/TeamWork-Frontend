@@ -1,0 +1,32 @@
+body{
+  background: #1b1a72;
+  margin: 1.5rem;
+}
+.Dashboard{
+  display: flex;
+  width: 100%;
+.sidebar{
+  width: 30%;
+  color:white;
+}
+.user-info{
+  width: 100%;
+  height: 10%;
+}
+.dashboard-body{
+    background-color: #fff;
+    width: 70%;
+    border-radius: 15px;
+    padding: 2rem;
+    color: black;
+}
+.feed{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  
+  .filters{
+    align-items: flex-end;
+  }
+}
+}

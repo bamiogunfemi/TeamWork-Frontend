@@ -1,0 +1,17 @@
+li{
+  list-style: none;
+  color:white;
+  margin: 1rem;
+  
+  cursor: pointer;
+
+  &:hover{
+    color:yellow;
+    border-left: 3px solid yellow;
+   
+  }
+}
+body{
+  
+  font-size: 1.5rem;
+}
