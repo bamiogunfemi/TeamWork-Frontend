@@ -1,11 +1,15 @@
-body{
-  background: #1b1a72;
-  margin: 1.5rem;
-}
+
 .Dashboard{
   display: flex;
   width: 100%;
 .sidebar{
+  height: 100%; 
+  position: fixed; 
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  background: #1b1a72;
   width: 30%;
   color:white;
 }
@@ -15,10 +19,11 @@ body{
 }
 .dashboard-body{
     background-color: #fff;
-    width: 70%;
+    margin-left: 30%;
     border-radius: 15px;
     padding: 2rem;
     color: black;
+    width: 100%;
 }
 .feed{
   display: flex;
@@ -30,3 +35,14 @@ body{
   }
 }
 }
+.big{
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.icon-small{
+  height: 1rem;
+  width: 1rem;
+  margin: 0 1rem;
+  
+}
+
