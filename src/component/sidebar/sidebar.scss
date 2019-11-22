@@ -1,18 +1,38 @@
-h3{
+h3 {
   text-transform: uppercase;
   font-weight: 400;
-  
+
 }
-.menu{
-  margin-top: 30%;
+
+.menu {
+  margin-top: 20%;
 }
-.secondary{
+
+.secondary {
   font-weight: 400;
-  
+
   opacity: 0.2;
 }
-body{
 
-  color:white;
-  
+body {
+
+  color: white;
+
+}
+
+.user-icon {
+  height: 8rem;
+  width: 6rem;
+  float: left;
+  margin: - 1rem 1rem;
+}
+
+.menu-icon {
+  margin: 0 1rem;
+}
+
+.exit-icon {
+  margin: 30% 0% 0% 5%;
+  height: 3rem;
+  width: 4rem;
 }
