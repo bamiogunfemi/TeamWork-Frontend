@@ -1,5 +1,6 @@
 import React from 'react'
-import PostContainer from '../../component/post-container/post-container'
+import FormInput from '../../component/formInput/formInput'
+
 
 const Articles =()=>(
   <div>
@@ -9,4 +10,4 @@ const Articles =()=>(
   </div>
 )
 
-export react Feed
+export default Articles

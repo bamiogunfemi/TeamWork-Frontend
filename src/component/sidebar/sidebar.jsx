@@ -4,7 +4,7 @@ import MenuItem from "../menu-item/menu-item";
 import { FaClone,FaCommentAlt,FaSortDownFaTrashAlt,FaListUl,FaUserAlt,} from 'react-icons/fa';
 import { MdGif } from "react-icons/md"
 import { IoIosLogOut } from "react-icons/io"
-
+import {Link } from 'react-router-dom'
 class Sidebar extends React.Component {
   constructor() {
     super();
@@ -26,10 +26,15 @@ class Sidebar extends React.Component {
         </div>
         <div className="menu">
           <p className="secondary">MENU</p>
-          <MenuItem><FaClone className='menu-icon'/> Feed</MenuItem>
+          <Link to='/'>
+          <MenuItem ><FaClone className='menu-icon'/> Feed</MenuItem>
+          </Link>
+          <Link  to='/articles'>
           <MenuItem><FaListUl className='menu-icon'/>Articles</MenuItem>
+          </Link>
+          <Link to='/gifs'>
           <MenuItem><MdGif className='menu-icon'/>GIFs</MenuItem>
-          
+          </Link>
         </div>
         <IoIosLogOut className='exit-icon'/>
       </div>

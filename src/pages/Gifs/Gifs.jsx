@@ -1,11 +1,11 @@
 import React from 'react'
 import Sidebar from '../../component/sidebar/sidebar'
 
-const Feed =()=>(
+const Gifs =()=>(
   <div>
    
 
   </div>
 )
 
-export react Feed
+export default Gifs
