@@ -12,7 +12,7 @@ const Dashboard = () => (
     </div>
     <div className="dashboard-body" >
       <Switch>
-        <Route exact path="/" component={Feed} />
+        <Route path="/" component={Feed} />
         <Route path="/articles" component={Articles} />
         <Route path="/gifs" component={Gifs} />
       </Switch>

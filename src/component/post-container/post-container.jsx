@@ -7,7 +7,7 @@ const PostContainer =()=>(
     <h1 class="f4">Bami Ogunfemi</h1> 
   </div>
   <div className="tc">
-  <p class="lh-copy measure center f6 black-70">
+  <p  class="lh-copy measure center f6 black-70">
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis eligendi ad quo aspernatur. Omnis mollitia
      voluptatum nobis aliquid! Sunt consequatur non eius quia praesentium id adipisci alias aliquam eum est!
   </p>

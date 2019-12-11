@@ -1,5 +1,4 @@
 import React from 'react'
-import Sidebar from '../../component/sidebar/sidebar'
 import FormInput from '../../component/formInput/formInput'
 import PostContainer from '../../component/post-container/post-container'
 import { FaChevronDown} from 'react-icons/fa';
