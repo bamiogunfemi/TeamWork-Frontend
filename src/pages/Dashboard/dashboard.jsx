@@ -5,16 +5,16 @@ import Articles from '../Articles/Articles'
 import Feed from '../Feed/feed'
 import Sidebar from '../../component/sidebar/sidebar'
 import Gifs from '../Gifs/Gifs'
-const Dashboard = () => (
+const Dashboard = ({match}) => (
   <div className="Dashboard">
     <div className="sidebar">
       <Sidebar />
     </div>
-    <div className="dashboard-body" >
+    <div className="dashboard-body " >
       <Switch>
-        <Route path="/" component={Feed} />
-        <Route path="/articles" component={Articles} />
-        <Route path="/gifs" component={Gifs} />
+        <Route exact path ={`${match.path}feeds`} component={Feed} />
+        <Route exact path ={`${match.path}articles`}component={Articles} />
+        <Route exact path ={`${match.path}gifs`} component={Gifs} />
       </Switch>
     </div>
   </div>

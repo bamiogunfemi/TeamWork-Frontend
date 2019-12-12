@@ -57,6 +57,7 @@ if(password && email){
             </Fragment>
 
           </form>
+       
         </main>
       </article>
 
