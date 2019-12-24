@@ -9,7 +9,7 @@ const Feed = () => (
     <hr />
 
     <p className='big'>Recent <FaChevronDown className='icon-small' /></p>
-    <PostContainer />
+    <PostContainer author={'bam'}  />
 
   </div>
 )
