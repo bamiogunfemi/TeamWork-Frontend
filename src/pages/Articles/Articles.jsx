@@ -1,12 +1,14 @@
 import React from 'react'
-import FormInput from '../../component/formInput/formInput'
 
-
-const Articles =()=>(
+import CustomButton from '../../component/custombutton/custombutton'
+import PostContainer from '../../component/post-container/post-container'
+const Articles = () => (
   <div>
-     <p className='big'>Make Post</p>
-      <FormInput  placeholder="What's up, Bami?" postInput/>
-
+    <div className="center">
+      <CustomButton>Make Post</CustomButton>
+    </div>
+    <hr />
+    <PostContainer />
   </div>
 )
 

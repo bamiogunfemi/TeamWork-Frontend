@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
         </div>
         <div className="menu">
           <p className="secondary">MENU</p>
-          <Link to='/'>
+          <Link to='/feeds'>
           <MenuItem ><FaClone className='menu-icon'/> Feed</MenuItem>
           </Link>
           <Link  to='/articles'>

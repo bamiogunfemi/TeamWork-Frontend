@@ -10,9 +10,9 @@ function App() {
       
       <Switch>
         
-        {/* <Route exact path="/" component={SignIn} /> */}
-        {/* <Route exact path="/" component={SignUp} /> */}
-        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route  path="/" component={Dashboard} />
       </Switch>
     </div>
   );

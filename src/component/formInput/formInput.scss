@@ -23,6 +23,7 @@ $main-color: black;
     border-radius: 0;
     border-bottom: 1px solid $sub-color;
     margin: 25px 0;
+    height: 100%;
 
 
     &:focus {
@@ -68,8 +69,14 @@ $main-color: black;
 .postInput {
   border: 0.7px solid grey;
   width: 100%;
+  
   border-radius: 12px;
-  height: 2rem;
+  
+  &:hover{
+    height: 10rem;
+    padding: 2rem;
+    
+  }
 
 
 }
