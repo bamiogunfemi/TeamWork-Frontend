@@ -6,7 +6,7 @@ import rootSaga from './root-saga';
 import { persistStore } from "redux-persist";
 const sagaMiddleware = createSagaMiddleware();
 
-const middeleWares =[];
+const middeleWares =[sagaMiddleware];
 if(process.env.NODE_ENV === 'development'){
   middeleWares.push(logger)
 }
