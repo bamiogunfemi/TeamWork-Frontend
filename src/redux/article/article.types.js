@@ -1,0 +1,8 @@
+const ArticleActionTypes ={
+  ARTICLE_START :'ARTICLE_START',
+  ARTICLE_FETCH_SUCCESS: 'ARTICLE_FETCH_SUCCESS',
+  ARTICLE_FETCH_FAILURE: 'ARTICLE_FETCH_FAILURE'
+}
+
+
+export default ArticleActionTypes;
