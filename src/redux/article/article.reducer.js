@@ -1,4 +1,4 @@
-import ArticleActionTypes from './feed.types'
+import ArticleActionTypes from './article.types'
 
 const INITIAL_STATE ={
   articles: {
