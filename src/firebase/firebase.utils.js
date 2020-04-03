@@ -1,4 +1,4 @@
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -14,12 +14,52 @@ const config = {
 };
 // Initialize Firebase
 firebase.initializeApp(config);
-firebase.analytics();
 
-export const createUserProfileDoc = async (userAuth, additionalData)=>{
+export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-  
-}
-export const auth = firebase.auth();
-export const firestore = firebase.firestore()
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
 
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const {
+      firstName,
+      lastName,
+      password,
+      email,
+      confirmPassword,
+      jobRole,
+      gender,
+      address
+    } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        firstName,
+        lastName,
+        password,
+        email,
+        confirmPassword,
+        jobRole,
+        gender,
+        address,
+        createdAt,
+        ...additionalData
+      });
+    } catch (err) {
+      console.log("error creating user", err.message);
+    }
+  }
+  return userRef;
+};
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
