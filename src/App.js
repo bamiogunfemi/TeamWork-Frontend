@@ -2,6 +2,7 @@ import React, {useEffect, lazy, Suspense} from "react";
 import SignUp from "./pages/SignUp/signup";
 import SignIn from "./pages/SignIn/signin";
 import Dashboard from "./pages/Dashboard/dashboard";
+import {userSession} from './redux/user/user.action'
 import { Route, Switch, Redirect } from "react-router-dom";
 import {connect } from 'react-redux';
 import {createStructuredSelector} from 'reselect'
@@ -26,5 +27,7 @@ const App=({currentUser})=> {
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 })
-
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  userSession: () => dispatch(userSession())
+});
+export default connect(mapStateToProps,mapDispatchToProps)(App);

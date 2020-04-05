@@ -6,7 +6,8 @@ import feedReducer from './feed/feed.reducer';
 import articleReducer from './article/article.reducer';
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+ 
 };
 const rootReducer = combineReducers({
   user:userReducer,

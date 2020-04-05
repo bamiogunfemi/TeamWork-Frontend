@@ -6,7 +6,6 @@ export const setCurrentUser = user => ({
 });
 
 
-
 export const signInStart = emailAndPassword => ({
   type: UserActionTypes.SIGN_IN_START,
   payload: emailAndPassword
@@ -22,7 +21,9 @@ export const signInFailure = error => ({
   payload: error
 });
 
-
+export const userSession = () => ({
+  type:UserActionTypes.USER_SESSION
+});
 
 export const signUpStart = userCredential => ({
   type: UserActionTypes.SIGN_UP_START,

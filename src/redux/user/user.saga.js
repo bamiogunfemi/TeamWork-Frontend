@@ -3,7 +3,7 @@ import UserActionTypes from "./user.types";
 import {
   auth,
   createUserProfileDocument,
-  getCurrentUser
+  getCurrentUser,
 } from "../../firebase/firebase.utils";
 import {
   signInFailure,
@@ -11,7 +11,7 @@ import {
   signOutSuccess,
   signUpSuccess,
   signUpFailure,
-  signOutFailure
+  signOutFailure,
 } from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalData) {
@@ -25,7 +25,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
     yield put(
       signInSuccess({
         id: userSnapshot.id,
-        ...userSnapshot.data()
+        ...userSnapshot.data(),
       })
     );
   } catch (error) {
@@ -33,7 +33,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-export function* SignUp({ payload: { password, email, additionalData } }) {
+export function* SignUp({ payload: { email, password, additionalData } }) {
   try {
     const { user } = yield auth().createUserWithEmailAndPassword(
       email,
@@ -47,13 +47,27 @@ export function* SignUp({ payload: { password, email, additionalData } }) {
 export function* SignIn({ payload: { email, password } }) {
   try {
     const { user } = yield { email, password };
+    yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signInFailure(error, "Error Signing In"));
+  }
+}
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapshotFromUserAuth(user, additionalData);
+}
+export function* isUserAuthenticated() {
+  try {
+    const userAuth = yield getCurrentUser();
+    if (!userAuth) return;
+    yield getSnapshotFromUserAuth(userAuth);
+  } catch (error) {
+    yield put(signInFailure(error));
   }
 }
 
 export function* SignOut() {
   try {
+    yield auth.signOut();
     yield put(signOutSuccess());
   } catch (error) {
     yield put(signOutFailure(error, "Error signing out"));
@@ -69,7 +83,15 @@ export function* onSignUpStart() {
 export function* onSignInStart() {
   yield takeLatest(UserActionTypes.SIGN_IN_START, SignIn);
 }
+export function* onUserSession() {
+  yield takeLatest(UserActionTypes.USER_SESSION, isUserAuthenticated);
+}
 // eslint-disable-next-line
 export function* userSagas() {
-  yield all([call(onSignInStart), call(onSignUpStart), call(onSignoutStart)]);
+  yield all([
+    call(onSignInStart),
+    call(onSignUpStart),
+    call(isUserAuthenticated),
+    call(onSignoutStart),
+  ]);
 }

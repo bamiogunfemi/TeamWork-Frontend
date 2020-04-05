@@ -5,7 +5,6 @@ import { signUpStart } from '../../redux/user/user.action'
 import { connect } from 'react-redux'
 
 
-
 const SignUp = ({ signUpStart }) => {
 
   const [signUpCredentials, setCredentials] = useState({
@@ -30,9 +29,7 @@ const SignUp = ({ signUpStart }) => {
       alert("passwords do not match");
       return;
     }
-    signUpStart({ firstName, email, lastName, jobRole })
-
-
+    signUpStart({ firstName,lastName, email, password, jobRole })
 
   }
 
@@ -141,4 +138,4 @@ const mapDispatchToProps = dispatch => ({
   signUpStart: userCredentials => dispatch(signUpStart())
 })
 
-export default connect(mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignUp);
