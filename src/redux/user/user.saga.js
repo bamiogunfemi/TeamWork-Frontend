@@ -33,9 +33,9 @@ export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-export function* SignUp({ payload: { email, password, additionalData } }) {
+export function* SignUp({ payload: { email, password } }) {
   try {
-    const { user } = yield auth().createUserWithEmailAndPassword(
+    const {user} = yield auth().createUserWithEmailAndPassword(
       email,
       password
     );

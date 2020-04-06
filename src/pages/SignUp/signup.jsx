@@ -6,10 +6,9 @@ import { connect } from 'react-redux'
 
 
 const SignUp = ({ signUpStart }) => {
-
   const [signUpCredentials, setCredentials] = useState({
     firstName: "",
-    lastName: '',
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -17,26 +16,24 @@ const SignUp = ({ signUpStart }) => {
     dept: '',
     gender: '',
     address: '',
-  })
+  });
   const { firstName, lastName, password, email, confirmPassword, jobRole, gender, address } = signUpCredentials
 
 
   const handleSubmit = async event => {
-
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("passwords do not match");
       return;
     }
-    signUpStart({ firstName,lastName, email, password, jobRole })
-
+    signUpStart({ firstName, lastName, email, password, jobRole });
   }
 
   const handleChange = e => {
 
     const { name, value } = e.target;
-    setCredentials({ ...signUpCredentials, [name]: value })
+    setCredentials({ ...signUpCredentials,[name]: value })
   }
 
 
@@ -66,12 +63,12 @@ const SignUp = ({ signUpStart }) => {
                 onChange={handleChange}
                 required
                 className="pa2 input-reset ba bg-transparent  w-100"
-                id="last-name"
               />
             </div>
             <div className="mv3">
               <label className='db fw6 lh-copy f6' htmlFor='email-address'>Email</label>
-              <input value={email}
+              <input 
+                value={email}
                 name='email'
                 onChange={handleChange}
                 label="Email"
@@ -92,13 +89,12 @@ const SignUp = ({ signUpStart }) => {
                 name="address"
                 value={address}
                 onChange={handleChange}
-                label="Address"
                 required className="pa2 input-reset ba bg-transparent  w-100" />
             </div>
 
             <div className="mv3 gender">
               <label className='db fw6 lh-copy f6' onChange={handleChange} value={gender} htmlFor='gender'>Gender</label>
-              <input type="radio" value='male' checked name='gender' /> Male  <br />
+              <input type="radio" value='male' defaultChecked name='gender' /> Male  <br />
               <input type="radio" value='female' name='gender' /> Female < br />
               <input type="radio" value='others' name='gender' /> Others <br />
 
@@ -137,5 +133,4 @@ const SignUp = ({ signUpStart }) => {
 const mapDispatchToProps = dispatch => ({
   signUpStart: userCredentials => dispatch(signUpStart())
 })
-
 export default connect(null, mapDispatchToProps)(SignUp);
