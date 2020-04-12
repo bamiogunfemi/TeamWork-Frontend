@@ -4,6 +4,8 @@ import storage from "redux-persist/lib/storage";
 import userReducer from './user/user.reducer';
 import feedReducer from './feed/feed.reducer';
 import articleReducer from './article/article.reducer';
+import {firebaseReducer} from "react-redux-firebase";
+import {firestoreReducer} from "redux-firestore";
 const persistConfig = {
   key: "root",
   storage,
@@ -12,6 +14,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user:userReducer,
   feed:feedReducer,
-  article:articleReducer
+  article:articleReducer,
+  firebase: firebaseReducer,
+  firestore: firestoreReducer
 });
 export default persistReducer(persistConfig, rootReducer);
