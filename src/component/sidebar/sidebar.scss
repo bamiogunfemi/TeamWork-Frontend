@@ -1,67 +1,73 @@
-/*BASE STYLES*/
 
-body {
+.sidebar{
+  height: 100%; 
+  position: fixed; 
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  background: #1b1a72;
+  width: 30%;
+  max-width: 250px;
+  color:white;
 
-  color: white;
-
-}
-
-h3 {
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 1.2rem;
-}
-
-
-/*Overriding styles*/
-.sidebar-container{
-  padding: 3rem 1rem;
-
-  .icon{
-    transition: color 0.5s;
+  h3 {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.2rem;
   }
 
-  > .user-info{
-    > .primary-info{
-      margin: 0;
+  > .sidebar-container{
+    padding: 3rem 1rem;
+  
+   
+    .icon{
+      transition: color 0.5s;
     }
-    > .secondary-info{
-      font-size: 1.1rem;
-      font-weight: 400;
-      opacity: 0.2;
-      margin-top: 0.4rem;
+  
+    > .user-info{
+      > .primary-info{
+        margin: 0;
+      }
+      > .secondary-info{
+        font-size: 1.1rem;
+        font-weight: 400;
+        opacity: 0.2;
+        margin-top: 0.4rem;
+      }
     }
-  }
-
-  > .menu {
-    margin-top: 2.5rem;
-    .menu-icon {
-      margin: 0 1rem;
+  
+    > .menu {
+      margin-top: 2.5rem;
+      .menu-icon {
+        margin: 0 1rem;
+      }
     }
-  }
-
-  > .exit-icon {
-    margin: 10% 0% 0% 0%;
-    cursor: pointer;
+  
+    > .exit-icon {
+      margin: 10% 0% 0% 0%;
+      cursor: pointer;
+      
     
-  
-    &:hover{
-      color:yellow;
-  
+      &:hover{
+        color:yellow;
+    
+      }
+    
+      &:active{
+        color:yellow;
+      }
     }
   
-    &:active{
-      color:yellow;
-    }
+    
+    
   }
-
+  
+  
+  
+  
+  
+  
   
   
 }
-
-
-
-
-
-
-

@@ -24,34 +24,36 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <div className="sidebar-container">
-        <div className="user-info">
-          {/* <FaUserAlt className='user-icon'/> */}
-          <h3 className="primary-info">{this.state.user}</h3>
-          <p className="secondary-info">{this.state.jobDes}</p>
+      <aside className = "sidebar">
+        <div className="sidebar-container">
+          <div className="user-info">
+            {/* <FaUserAlt className='user-icon'/> */}
+            <h3 className="primary-info">{this.state.user}</h3>
+            <p className="secondary-info">{this.state.jobDes}</p>
+          </div>
+          <div className="menu">
+            <h3 className="secondary">MENU</h3>
+            <Link to="/feeds">
+              <MenuItem>
+                <FaClone className="menu-icon icon" /> Feed
+              </MenuItem>
+            </Link>
+            <Link to="/articles">
+              <MenuItem>
+                <FaListUl className="menu-icon icon" />
+                Articles
+              </MenuItem>
+            </Link>
+            <Link to="/gifs">
+              <MenuItem>
+                <MdGif className="menu-icon icon" />
+                GIFs
+              </MenuItem>
+            </Link>
+          </div>
+          <IoIosLogOut className="exit-icon icon" />
         </div>
-        <div className="menu">
-          <h3 className="secondary">MENU</h3>
-          <Link to="/feeds">
-            <MenuItem>
-              <FaClone className="menu-icon icon" /> Feed
-            </MenuItem>
-          </Link>
-          <Link to="/articles">
-            <MenuItem>
-              <FaListUl className="menu-icon icon" />
-              Articles
-            </MenuItem>
-          </Link>
-          <Link to="/gifs">
-            <MenuItem>
-              <MdGif className="menu-icon icon" />
-              GIFs
-            </MenuItem>
-          </Link>
-        </div>
-        <IoIosLogOut className="exit-icon icon" />
-      </div>
+      </aside>
     );
   }
 }

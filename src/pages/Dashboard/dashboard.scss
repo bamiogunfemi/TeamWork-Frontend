@@ -2,17 +2,7 @@
 .Dashboard{
   display: flex;
   width: 100%;
-.sidebar{
-  height: 100%; 
-  position: fixed; 
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  background: #1b1a72;
-  width: 30%;
-  color:white;
-}
+
 .dashboard-body{
     background-color: #fff;
     margin-left: 30%;
