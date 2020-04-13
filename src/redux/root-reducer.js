@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import userReducer from './user/user.reducer';
 import feedReducer from './feed/feed.reducer';
 import articleReducer from './article/article.reducer';
 import {firebaseReducer} from "react-redux-firebase";
@@ -12,7 +11,7 @@ const persistConfig = {
  
 };
 const rootReducer = combineReducers({
-  user:userReducer,
+  
   feed:feedReducer,
   article:articleReducer,
   firebase: firebaseReducer,

@@ -1,33 +1,29 @@
 import React, {useEffect, lazy, Suspense} from "react";
-import SignUp from "./pages/SignUp/signup";
-import SignIn from "./pages/SignIn/signin";
+import SignUp from "./pages/Authentication/signup";
+import SignIn from "./pages/Authentication/signin";
 import Dashboard from "./pages/Dashboard/dashboard";
-import {userSession} from './redux/user/user.action'
-import { Route, Switch, Redirect } from "react-router-dom";
-import {connect } from 'react-redux';
-import {createStructuredSelector} from 'reselect'
-import {selectCurrentUser} from './redux/user/user.selector'
+
+import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "./component/PrivateRoute";
 
 
-const App=({currentUser})=> {
+const App=()=> {
   return (
     <div className="App">
       <Switch>
-        <Route 
-        exact
-         path="/signin"
-        render={()=> currentUser ? 
-        <Redirect to ='/'/>: <SignIn/>} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route  path="/" component={Dashboard} />
+        <PrivateRoute path = "/dashboard">
+          <Dashboard />
+        </PrivateRoute>
+        <Route path = "/signup">
+          <SignUp />
+        </Route>
+        <Route path = "/">
+          <SignIn />
+        </Route>
+        
       </Switch>
     </div>
   );
 }
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-})
-const mapDispatchToProps = dispatch => ({
-  userSession: () => dispatch(userSession())
-});
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+
+export default App;
