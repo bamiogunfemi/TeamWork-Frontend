@@ -15,9 +15,10 @@ const Dashboard = () => {
 
       <div className="dashboard-body ">
         <Switch>
-          <Route exact path={`${match.path}/`} component={Feed} />
-          <Route exact path={`${match.path}/articles`} component={Articles} />
-          <Route exact path={`${match.path}/gifs`} component={Gifs} />
+          
+          <Route path={`${match.path}/articles`} component={Articles} />
+          <Route path={`${match.path}/gifs`} component={Gifs} />
+          <Route path={`${match.path}/`} component={Feed} />
         </Switch>
       </div>
     </div>

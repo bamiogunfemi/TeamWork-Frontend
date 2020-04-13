@@ -9,11 +9,13 @@ import { MdGif } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useFirebase } from "react-redux-firebase";
+
 function Sidebar(){
  
     const {firstName, lastName, jobRole} = useSelector(state => state.firebase.profile);
     
-  
+  const firebase = useFirebase();
 
     return (
       <aside className = "sidebar">
@@ -25,25 +27,25 @@ function Sidebar(){
           </div>
           <div className="menu">
             <h3 className="secondary">MENU</h3>
-            <NavLink to="/dashboard/">
+            <NavLink exact to="/dashboard/" activeClassName = "active-dashboard-link">
               <MenuItem>
                 <FaClone className="menu-icon icon" /> Feed
               </MenuItem>
             </NavLink>
-            <NavLink to="/dashboard/articles">
+            <NavLink to="/dashboard/articles" activeClassName = "active-dashboard-link">
               <MenuItem>
                 <FaListUl className="menu-icon icon" />
                 Articles
               </MenuItem>
             </NavLink>
-            <NavLink to="/dashboard/gifs">
+            <NavLink to="/dashboard/gifs" activeClassName = "active-dashboard-link">
               <MenuItem>
                 <MdGif className="menu-icon icon" />
                 GIFs
               </MenuItem>
             </NavLink>
           </div>
-          <IoIosLogOut className="exit-icon icon" />
+          <IoIosLogOut className="exit-icon icon" onClick = {() => firebase.logout()} />
         </div>
       </aside>
     );
