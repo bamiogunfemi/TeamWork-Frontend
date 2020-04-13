@@ -3,7 +3,7 @@ import "./authentication.scss";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 
-const SignUp = ({ signUpStart }) => {
+const SignUp = () => {
   const [signUpCredentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -12,7 +12,7 @@ const SignUp = ({ signUpStart }) => {
     confirmPassword: "",
     jobRole: "",
     dept: "",
-    gender: "",
+    gender: "male",
     address: "",
   });
   const {
@@ -55,6 +55,7 @@ const SignUp = ({ signUpStart }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...signUpCredentials, [name]: value });
+    
   };
 
   return (
@@ -164,7 +165,7 @@ const SignUp = ({ signUpStart }) => {
             onChange={handleChange}
           />
         </div>
-        <button className="email-button" onSubmit={handleSubmit}>
+        <button className="email-button" onClick={handleSubmit}>
           Sign up with email
         </button>
       </form>
