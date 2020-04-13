@@ -1,21 +1,44 @@
-li{
-  list-style: none;
-  color:white;
-  margin:1rem 0;
-  
-  cursor: pointer;
-
-  &:hover{
-    color:yellow;
-    border-left: 3px solid yellow;
-   
-  }
-}
-body{
-  
+body {
   font-size: 1.5rem;
 }
 
-a{
+a {
   text-decoration: none;
+}
+
+li {
+  list-style: none;
+  color: white;
+  margin: 1rem 0;
+  font-size: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+
+  &::before {
+    content: "";
+    height: 0px;
+    background-color: yellow;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    transition: height 0.3s;
+  }
+  &:hover {
+    color: yellow;
+    &::before {
+      content: "";
+      height: 100%;
+    }
+  }
+
+  .active-dashboard-link & {
+    color: yellow;
+
+    &::before {
+      content: "";
+      height: 100%;
+    }
+  }
 }
