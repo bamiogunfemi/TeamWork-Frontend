@@ -1,7 +1,7 @@
 import ArticleActionTypes from './article.types'
 
 export const articleStart =()=>({
-type: FeedActionTypes.ARTICLE_START
+type: ArticleActionTypes.ARTICLE_START
 });
 
 export const articleSuccess =(article)=>({
