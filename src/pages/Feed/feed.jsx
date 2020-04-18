@@ -1,18 +1,23 @@
 import React from 'react'
-import FormInput from '../../component/formInput/formInput'
-import PostContainer from '../../component/post-container/post-container';
+import SearchField from '../../component/searchfield/searchfield'
+import PostContainer from '../../component/post-container/post-container'
 import { FaChevronDown } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux'
+
+import { useFirestoreConnect } from 'react-redux-firebase'
 import './feed.scss'
 const Feed = ({ feeds }) => {
   useFirestoreConnect([
     { collection: 'feeds' }
   ])
-  const todos = useSelector(state => state.firestore.feeds)
+  const feed = useSelector(state => state.firestore.feeds)
+
 
   return (
+
     <div>
+      <SearchField />
+
       <p className='big'>Recent <FaChevronDown className='icon-small' /></p>
       {feeds ? (
         feeds.map(feed =>
