@@ -9,9 +9,7 @@ const Dashboard = () => {
   const match = useRouteMatch();
   const [isSideBarOpenOnMobile, setisSideBarOpenOnMobile] = useState(false);
 
-  if(window.matchMedia("(min-width:600px)").matches){
-    setisSideBarOpenOnMobile(false);
-  }
+  
   return (
     <div className="Dashboard">
       <div>

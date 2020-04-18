@@ -13,6 +13,9 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
     (state) => state.firebase.profile
   );
 
+  if(window.matchMedia("(min-width:600px)").matches){
+    closeSideBar();
+  }
   const firebase = useFirebase();
 
   return (

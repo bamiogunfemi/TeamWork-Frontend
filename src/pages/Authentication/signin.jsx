@@ -1,13 +1,14 @@
 import React, { useState, Fragment } from "react";
 import "./authentication.scss";
 import { useFirebase } from "react-redux-firebase";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isLoaded, isEmpty } from "react-redux-firebase";
 import Loader from "react-loader-spinner";
 
 const SignIn = () => {
   const auth = useSelector((state) => state.firebase.auth);
+  const location = useLocation();
 
   const [userCredentials, setCredentials] = useState({
     email: "",
@@ -44,7 +45,7 @@ const SignIn = () => {
       });
   };
 
-  if (!isLoaded(auth) && !isEmpty(auth)) {
+  if (!isLoaded(auth) && isEmpty(auth)) {
     return (
       <Loader
         type="Puff"
@@ -53,6 +54,17 @@ const SignIn = () => {
         width={100}
         timeout={3000} //3 secs
       />
+    );
+  }
+
+  if(isLoaded(auth)){
+    return (
+    <Redirect
+      to={{
+        pathname: "/dashboard",
+        state: { from: location }
+      }} 
+    />
     );
   }
   return (
