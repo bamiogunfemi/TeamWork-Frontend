@@ -57,7 +57,7 @@ const SignIn = () => {
     );
   }
 
-  if(isLoaded(auth)){
+  if(isLoaded(auth) && !isEmpty(auth)){
     return (
     <Redirect
       to={{
