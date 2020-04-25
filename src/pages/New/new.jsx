@@ -64,7 +64,7 @@ const New = () => {
       <button onClick={
         addNew(postTitle, postContent)
       }>
-        Add Sample Todo
+        Post New Article
         </button>
     </form>
 
