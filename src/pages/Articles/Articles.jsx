@@ -8,6 +8,7 @@ const Articles = () => {
       <PostContainer />
 
     </div>
+  )
 }
 
 export default Articles

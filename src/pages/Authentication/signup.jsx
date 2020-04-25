@@ -1,9 +1,7 @@
-import React, { useState, Suspense, useSelector } from "react";
+import React, { useState } from "react";
 import "./authentication.scss";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
-import Loader from '../../component/loader/loader'
-import { isLoaded } from 'react-redux-firebase'
 
 const SignUp = () => {
   const [signUpCredentials, setCredentials] = useState({
@@ -30,11 +28,9 @@ const SignUp = () => {
 
   const history = useHistory();
   const firebase = useFirebase();
-  const auth = useSelector(state => state.firebase.auth)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!isLoaded(auth)) return <Loader />;
 
     if (password !== confirmPassword) {
       alert("passwords do not match");
@@ -67,116 +63,113 @@ const SignUp = () => {
       <h1>Sign Up</h1>
 
       <form className="form">
-        <Suspense callback={<Loader />}>
-          <div className="label-input-container">
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              value={firstName}
-              required
-              id="firstName"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container">
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              value={lastName}
-              required
-              id="lastName"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              id="email"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container">
-            <label htmlFor="jobRole">Job Role</label>
-            <input
-              type="text"
-              name="jobRole"
-              required
-              id="jobRole"
-              value={jobRole}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              name="address"
-              required
-              id="address"
-              value={address}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container w-100">
-            <label onChange={handleChange} value={gender} htmlFor="gender">
-              Gender
+        <div className="label-input-container">
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            name="firstName"
+            value={firstName}
+            required
+            id="firstName"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            name="lastName"
+            value={lastName}
+            required
+            id="lastName"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            id="email"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container">
+          <label htmlFor="jobRole">Job Role</label>
+          <input
+            type="text"
+            name="jobRole"
+            required
+            id="jobRole"
+            value={jobRole}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container">
+          <label htmlFor="address">Address</label>
+          <input
+            type="text"
+            name="address"
+            required
+            id="address"
+            value={address}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container w-100">
+          <label onChange={handleChange} value={gender} htmlFor="gender">
+            Gender
           </label>
-            <div className="gender-container">
-              <div>
-                <input
-                  type="radio"
-                  id="male"
-                  value="male"
-                  defaultChecked
-                  name="gender"
-                />
-                <label htmlFor="male">Male</label>
-              </div>
+          <div className="gender-container">
+            <div>
+              <input
+                type="radio"
+                id="male"
+                value="male"
+                defaultChecked
+                name="gender"
+              />
+              <label htmlFor="male">Male</label>
+            </div>
 
-              <div>
-                <input type="radio" value="female" id="female" name="gender" />
-                <label htmlFor="female">Female</label>
-              </div>
+            <div>
+              <input type="radio" value="female" id="female" name="gender" />
+              <label htmlFor="female">Female</label>
+            </div>
 
-              <div>
-                <input type="radio" value="others" id="others" name="gender" />
-                <label htmlFor="others">Others</label>
-              </div>
+            <div>
+              <input type="radio" value="others" id="others" name="gender" />
+              <label htmlFor="others">Others</label>
             </div>
           </div>
-          <div className="label-input-container">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={handleChange}
-            />
-          </div>
+        </div>
+        <div className="label-input-container">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className="label-input-container">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={handleChange}
-            />
-          </div>
-          <button className="email-button" onClick={handleSubmit}>
-            Sign up with email
+        <div className="label-input-container">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={handleChange}
+          />
+        </div>
+        <button className="email-button" onClick={handleSubmit}>
+          Sign up with email
         </button>
-        </Suspense>
       </form>
     </div>
   );
 };
-
 export default SignUp;
