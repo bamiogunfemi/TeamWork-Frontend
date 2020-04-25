@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { useFirestore } from 'react-redux-firebase'
-import { useSelector } from 'react-redux'
-import { useFirestoreConnect } from 'react-redux-firebase'
+import { useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
+
 import './new.scss'
 const New = () => {
-  const firestore = useFirestore()
+  const firestore = useFirestore();
+  const history = useHistory();
+
+  const { uid } = useSelector((state) => state.firebase.auth);
 
   const [newCredentials, setCredentials] = useState({
-    author: '',
     postTitle: '',
     postContent: ''
   });

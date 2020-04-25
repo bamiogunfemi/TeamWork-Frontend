@@ -3,7 +3,6 @@ import SearchField from '../../component/searchfield/searchfield'
 import PostContainer from '../../component/post-container/post-container'
 import { FaChevronDown } from 'react-icons/fa';
 import { useSelector } from 'react-redux'
-
 import { useFirestoreConnect } from 'react-redux-firebase'
 import './feed.scss'
 const Feed = ({ feeds }) => {

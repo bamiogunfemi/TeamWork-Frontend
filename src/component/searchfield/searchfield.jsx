@@ -1,29 +1,12 @@
-import React from "react";
+import React from 'react';
+import './searchfield.scss'
 
-const FormInput = ({
-  handleChange,
-  label,
-  searchInput,
-  postInput,
-  ...otherFormProps
-}) => {
-  return (
-    <div className="group">
-      <input
-        className={`${searchInput ? 'searchInput': ""}
-          ${postInput ? "postInput" : ""} `}
-        onChange={handleChange}
-        {...otherFormProps}
-      />
+const SearchField =()=>(
+  <div id="wrap">
+  <form action="" autocomplete="on">
+  <input id="search" name="search" type="text" placeholder="What're we looking for ?"/><input id="search_submit" value="Rechercher" type="submit"/>
+  </form>
+</div>
+)
 
-      {label ? (
-        <label
-          className={`${otherFormProps.value.length} ? 'shrink': ''} form-input-label`}
-        >
-          {label}
-        </label>
-      ) : null}
-    </div>
-  );
-};
-export default FormInput;
+export default SearchField
