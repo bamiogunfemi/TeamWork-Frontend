@@ -1,75 +1,127 @@
 
+
+
+
+
+
+.cancel-icon{
+  margin: 1rem 0 2rem 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  
+  cursor: pointer;
+  > div{
+    height: 100%;
+    
+    border-radius: 10px;
+    
+    background-color: white;
+  }
+  >.first{
+    width: 4px;
+    transform: rotate(45deg);
+  }
+  >.second{
+    width: 4px;
+    transform: rotate(135deg);
+  }
+}
+
+
 .sidebar{
-  height: 100%; 
-  position: fixed; 
-  z-index: 1;
+  height: 100%;
+  position: absolute;
+  z-index: 20;
   top: 0;
   left: 0;
+  width: 0%;
+  transition: width 1s;
+  //flex:0.3;
+  //display: none;
   overflow-x: hidden;
   background: #1b1a72;
-  width: 30%;
-  max-width: 250px;
-  color:white;
+  color: white;
 
+  &::before{
+    content: "";
+    display: block;
+    height: 100%;
+    z-index: 20;
+    position: fixed;
+    right:0;
+    width: 0%;
+    transition: width 1s;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  &.mobile-open-sidebar{
+    width: 90%;
+    &::before{
+      width: 10%;
+      background-color: rgba(0,0,0,0.5);
+    }
+  
+  }
+  
   h3 {
     text-transform: uppercase;
     font-weight: 400;
     font-size: 1.2rem;
   }
 
-  > .sidebar-container{
+  > .sidebar-container {
     padding: 3rem 1rem;
 
-    
-  
-   
-    .icon{
+    .icon {
       transition: color 0.5s;
     }
-  
-    > .user-info{
-      > .primary-info{
+
+    > .user-info {
+      > .primary-info {
         margin: 0;
       }
-      > .secondary-info{
+      > .secondary-info {
         font-size: 1.1rem;
         font-weight: 400;
         opacity: 0.2;
         margin-top: 0.4rem;
       }
     }
-  
+
     > .menu {
       margin-top: 2.5rem;
       .menu-icon {
         margin: 0 1rem;
       }
     }
-  
+
     > .exit-icon {
       margin: 10% 0% 0% 0%;
       cursor: pointer;
-      
-    
-      &:hover{
-        color:yellow;
-    
+
+      &:hover {
+        color: yellow;
       }
-    
-      &:active{
-        color:yellow;
+
+      &:active {
+        color: yellow;
       }
     }
-  
-    
-    
   }
-  
-  
-  
-  
-  
-  
-  
-  
+}
+
+@media only screen and (min-width: 600px){
+  .sidebar {
+    width: 30%;
+    max-width: 250px; 
+    display: block;
+    .cancel-icon{
+      display: none;
+    }
+    &::before{
+      display: none;
+    }
+  }
 }
