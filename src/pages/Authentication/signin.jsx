@@ -1,10 +1,10 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import "./authentication.scss";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isLoaded, isEmpty } from "react-redux-firebase";
-import Loader from "react-loader-spinner";
+import Loader from '../../component/loader/loader'
 
 const SignIn = () => {
   const auth = useSelector((state) => state.firebase.auth);
@@ -43,16 +43,9 @@ const SignIn = () => {
         history.push("/dashboard");
       });
   };
-
   if (!isLoaded(auth) && !isEmpty(auth)) {
     return (
-      <Loader
-        type="Puff"
-        color="#00BFFF"
-        height={100}
-        width={100}
-        timeout={3000} //3 secs
-      />
+      <Loader />
     );
   }
   return (
