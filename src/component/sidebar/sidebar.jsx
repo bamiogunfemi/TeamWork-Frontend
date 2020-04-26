@@ -25,7 +25,7 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
         }`}
     >
       <div className="sidebar-container">
-        <div class="cancel-icon" onClick={closeSideBar}>
+        <div className="cancel-icon" onClick={closeSideBar}>
           <svg
             fill="#ffffff"
             xmlns="http://www.w3.org/2000/svg"

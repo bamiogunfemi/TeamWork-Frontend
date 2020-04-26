@@ -14,7 +14,7 @@ const SignUp = () => {
     confirmPassword: "",
     jobRole: "",
     dept: "",
-    gender: "male",
+    gender: "",
     address: "",
   });
   const {

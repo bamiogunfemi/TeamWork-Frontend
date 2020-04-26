@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFirestore } from 'react-redux-firebase'
 import { useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, useLocation } from "react-router-dom";
 
 import './new.scss'
 const New = () => {
@@ -19,6 +19,7 @@ const New = () => {
     const { name, value } = e.target;
     setCredentials({ ...newCredentials, [name]: value });
   };
+
   const addNew = (postTitle, postContent) => {
     firestore
       .collection("users")
@@ -37,41 +38,39 @@ const New = () => {
 
         );
       });
-
-    history.push("/dashboard/articles");
-    console.log(uid);
   };
 
 
   return (
-    <form >
-      <div className="label-input-container">
-        <label htmlFor="text">Title</label>
-        <input
-          type="text"
-          name="postTitle"
-          value={postTitle}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="label-input-container">
-        <label htmlFor="text">Title</label>
-        <textarea name="postContent" onChange={handleChange}
-          value={postContent} cols="30" rows="10">
-        </textarea>
 
-      </div>
-      <button onClick={
-        addNew(postTitle, postContent)
-      }>
-        Post New Article
+    <div className="form-container">
+      <form className="form">
+        <div className="label-input-container">
+          <label htmlFor="text">Title</label>
+          <input
+            type="text"
+            name="postTitle"
+            value={postTitle}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="label-input-container">
+          <textarea name="postContent" onChange={handleChange}
+            value={postContent} cols="37" rows="8">
+          </textarea>
+
+        </div>
+        <button onClick={
+          addNew(postTitle, postContent)
+        }>
+          Post New Article
         </button>
-    </form>
+      </form>
+    </div>
 
   )
 }
 export default New
-
 
 
 

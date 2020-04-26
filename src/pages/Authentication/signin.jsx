@@ -4,7 +4,7 @@ import { useFirebase } from "react-redux-firebase";
 import { useHistory, Redirect, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { isLoaded, isEmpty } from "react-redux-firebase";
-import Loader from '../../component/loader/loader'
+import Loader from "react-loader-spinner";
 
 const SignIn = () => {
   const auth = useSelector((state) => state.firebase.auth);
@@ -44,20 +44,27 @@ const SignIn = () => {
         history.push("/dashboard");
       });
   };
-  if (!isLoaded(auth) && !isEmpty(auth)) {
+
+  if (!isLoaded(auth) && isEmpty(auth)) {
     return (
-      <Loader />
+      <Loader
+        type="Puff"
+        color="#1b1a72"
+        height={100}
+        width={100}
+        timeout={3000} //3 secs
+      />
     );
   }
 
-  if(isLoaded(auth) && !isEmpty(auth)){
+  if (isLoaded(auth) && !isEmpty(auth)) {
     return (
-    <Redirect
-      to={{
-        pathname: "/dashboard",
-        state: { from: location }
-      }} 
-    />
+      <Redirect
+        to={{
+          pathname: "/dashboard",
+          state: { from: location }
+        }}
+      />
     );
   }
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from "react";
+import React from "react";
 import SignUp from "./pages/Authentication/signup";
 import SignIn from "./pages/Authentication/signin";
 import Dashboard from "./pages/Dashboard/dashboard";
