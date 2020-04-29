@@ -21,6 +21,7 @@ const New = () => {
   };
 
   const addNew = (postTitle, postContent) => {
+
     firestore
       .collection("users")
       .doc(uid)
@@ -37,6 +38,11 @@ const New = () => {
           }
 
         );
+      });
+
+      setCredentials({
+        postTitle: '',
+        postContent: ''
       });
   };
 
@@ -61,7 +67,11 @@ const New = () => {
 
         </div>
         <button onClick={
-          addNew(postTitle, postContent)
+          (e) => {
+            e.preventDefault();
+            addNew(postTitle, postContent)
+          }
+          
         }>
           Post New Article
         </button>
