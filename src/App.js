@@ -1,4 +1,4 @@
-import React, {useEffect, lazy, Suspense} from "react";
+import React from "react";
 import SignUp from "./pages/Authentication/signup";
 import SignIn from "./pages/Authentication/signin";
 import Dashboard from "./pages/Dashboard/dashboard";
@@ -6,24 +6,22 @@ import Dashboard from "./pages/Dashboard/dashboard";
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from "./component/PrivateRoute";
 
-
-const App=()=> {
+const App = () => {
   return (
     <div className="App">
       <Switch>
-        <PrivateRoute path = "/dashboard">
+        <PrivateRoute path="/dashboard">
           <Dashboard />
         </PrivateRoute>
-        <Route path = "/signup">
+        <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path = "/">
+        <Route path="/">
           <SignIn />
         </Route>
-        
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

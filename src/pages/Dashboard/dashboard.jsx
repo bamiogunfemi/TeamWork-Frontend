@@ -5,6 +5,7 @@ import Articles from "../Articles/Articles";
 import Feed from "../Feed/feed";
 import Sidebar from "../../component/sidebar/sidebar";
 import Gifs from "../Gifs/Gifs";
+import New from '../New/new.jsx'
 const Dashboard = () => {
   const match = useRouteMatch();
   const [isSideBarOpenOnMobile, setisSideBarOpenOnMobile] = useState(false);
@@ -19,7 +20,7 @@ const Dashboard = () => {
 
       <div className="dashboard-body ">
         <div class = "hamburger-icon" onClick = {
-          () =>{
+          () =>{ 
             setisSideBarOpenOnMobile(!isSideBarOpenOnMobile);
           }
         }>
@@ -31,7 +32,9 @@ const Dashboard = () => {
           
           <Route path={`${match.path}/articles`} component={Articles} />
           <Route path={`${match.path}/gifs`} component={Gifs} />
+          <Route path={`${match.path}/new`} component={New} />
           <Route path={`${match.path}/`} component={Feed} />
+
         </Switch>
       </div>
     </div>

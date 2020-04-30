@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import "./authentication.scss";
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Redirect, useLocation } from "react-router-dom";
@@ -49,7 +49,7 @@ const SignIn = () => {
     return (
       <Loader
         type="Puff"
-        color="#00BFFF"
+        color="#1b1a72"
         height={100}
         width={100}
         timeout={3000} //3 secs
@@ -57,14 +57,14 @@ const SignIn = () => {
     );
   }
 
-  if(isLoaded(auth) && !isEmpty(auth)){
+  if (isLoaded(auth) && !isEmpty(auth)) {
     return (
-    <Redirect
-      to={{
-        pathname: "/dashboard",
-        state: { from: location }
-      }} 
-    />
+      <Redirect
+        to={{
+          pathname: "/dashboard",
+          state: { from: location }
+        }}
+      />
     );
   }
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import "./sidebar.scss";
 import MenuItem from "../menu-item/menu-item";
 import { FaClone, FaListUl } from "react-icons/fa";
-import { MdGif } from "react-icons/md";
+import { MdGif, MdAdd } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
     (state) => state.firebase.profile
   );
 
-  if(window.matchMedia("(min-width:600px)").matches){
+  if (window.matchMedia("(min-width:600px)").matches) {
     closeSideBar();
   }
   const firebase = useFirebase();
@@ -22,10 +22,10 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
     <aside
       className={`sidebar ${
         isSideBarOpenOnMobile ? "mobile-open-sidebar" : ""
-      }`}
+        }`}
     >
       <div className="sidebar-container">
-        <div class="cancel-icon" onClick = {closeSideBar}>
+        <div className="cancel-icon" onClick={closeSideBar}>
           <svg
             fill="#ffffff"
             xmlns="http://www.w3.org/2000/svg"
@@ -63,16 +63,20 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
           <NavLink to="/dashboard/gifs" activeClassName="active-dashboard-link">
             <MenuItem>
               <MdGif className="menu-icon icon" />
-              GIFs
-            </MenuItem>
+                GIFs
+              </MenuItem>
+          </NavLink>
+          <NavLink to="/dashboard/new" activeClassName="active-dashboard-link">
+            <MenuItem>
+              <MdAdd className="menu-icon icon" />
+               New
+              </MenuItem>
           </NavLink>
         </div>
-        <IoIosLogOut
-          className="exit-icon icon"
-          onClick={() => firebase.logout()}
-        />
+        <IoIosLogOut className="exit-icon icon" onClick={() => firebase.logout()} />
       </div>
     </aside>
   );
+
 }
 export default Sidebar;
