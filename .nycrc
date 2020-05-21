@@ -1,0 +1,16 @@
+{
+all: true,
+include: [
+"src"
+],
+requires: [
+"@babel/register"
+],
+exclude: [
+"src/database/init.js",
+"src/database/migrations/",
+"src/database/seeders/",
+"src/validations/",
+"src/index.js"
+]
+}

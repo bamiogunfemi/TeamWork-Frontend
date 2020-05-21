@@ -1,0 +1,651 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Teamwork API",
+    "description" : "Teamwork is an internal social network for employees of an organization",
+    "contact" : {
+      "email" : "ayobamiarafat09@gmail.com"
+    },
+    "license" : {
+      "name" : "MIT License",
+      "url" : "https://opensource.org/licenses/MIT"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/meetKazuki/Teamwork/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "localhost:3000",
+    "description" : "Sandbox Server (uses test data)"
+  }, {
+    "url" : "https://teamed.herokuapp.com/",
+    "description" : "Production Server (uses live data)"
+  } ],
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "staffs",
+    "description" : "Operations available to every user"
+  } ],
+  "paths" : {
+    "/auth/create-user" : {
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "create user account",
+        "description" : "Admin user signup a staff to the application",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token for admin user to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "create staff account",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/signup_payload"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "user account created, token is supplied",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "validation error"
+          },
+          "409" : {
+            "description" : "user with email already exists"
+          }
+        }
+      }
+    },
+    "/auth/signin" : {
+      "post" : {
+        "tags" : [ "staffs" ],
+        "summary" : "login a user",
+        "description" : "Admin/Staffs can login using this endpoint",
+        "requestBody" : {
+          "description" : "payload for signin request",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/signin_payload"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "login successful",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "validation error"
+          }
+        }
+      }
+    },
+    "/articles" : {
+      "post" : {
+        "tags" : [ "staffs" ],
+        "summary" : "involved with managing article creation",
+        "description" : "creates an article",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token for admin to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "article a staff wants to create",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/create_article_payload"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "article was successfully created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, validation error"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      }
+    },
+    "/articles/:articleId" : {
+      "get" : {
+        "tags" : [ "staffs" ],
+        "summary" : "retrieve an article using its ID",
+        "description" : "retrieves an article object",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        }, {
+          "name" : "articleId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "article was successfully retrieved"
+          },
+          "404" : {
+            "description" : "article does not exist"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "staffs" ],
+        "summary" : "delete an article using its ID",
+        "description" : "destroy an article",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        }, {
+          "name" : "articleId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "article was successfully deleted"
+          },
+          "400" : {
+            "description" : "invalid input, validation error"
+          },
+          "404" : {
+            "description" : "article does not exist"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "staffs" ],
+        "summary" : "modifying an article using its ID",
+        "description" : "edit either an article title or its body",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token for admin to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        }, {
+          "name" : "articleId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "can either be title or article",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/create_article_payload"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "article was successfully updated",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, validation error"
+          },
+          "404" : {
+            "description" : "article does not exist"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      }
+    },
+    "/gifs" : {
+      "post" : {
+        "tags" : [ "staffs" ],
+        "summary" : "operations concerning creation of gif posts",
+        "description" : "create a gif post",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token for staff to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "gif post a staff wants to create",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/create_gif_payload"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "gif post was successfully created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_201_2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "invalid input, validation error"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      }
+    },
+    "/gifs/:gifId" : {
+      "get" : {
+        "tags" : [ "staffs" ],
+        "summary" : "retrieve a gif post using its ID",
+        "description" : "retrieves a gif object",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        }, {
+          "name" : "gifId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "gif post was successfully retrieved"
+          },
+          "404" : {
+            "description" : "gif post does not exist"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "staffs" ],
+        "summary" : "delete a gif post using its ID",
+        "description" : "deletes a gif object",
+        "parameters" : [ {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "token to access the route",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "Bearer {token}"
+          }
+        }, {
+          "name" : "gifId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "gif post was successfully deleted"
+          },
+          "404" : {
+            "description" : "gif post does not exist"
+          },
+          "412" : {
+            "description" : "authorization header not set"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "User" : {
+        "required" : [ "address", "department", "email", "firstname", "gender", "jobRole", "lastname", "manufacturer", "password" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "firstname" : {
+            "type" : "string",
+            "example" : "Nadia"
+          },
+          "lastname" : {
+            "type" : "string",
+            "example" : "Blanche"
+          },
+          "jobRole" : {
+            "type" : "string",
+            "example" : "Investor Optimization Supervisor"
+          },
+          "gender" : {
+            "type" : "string",
+            "example" : "male"
+          },
+          "department" : {
+            "type" : "string",
+            "example" : "Applications"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "6840 Reynold Extensions"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "Manuela61@hotmail.com"
+          },
+          "isAdmin" : {
+            "type" : "boolean",
+            "example" : false
+          }
+        }
+      },
+      "Article" : {
+        "required" : [ "article", "title" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "example" : "e89f80b1-0b45-4f3b-baa1-cd64631e1854"
+          },
+          "title" : {
+            "type" : "string",
+            "example" : "Quod necessitatibus recusandae"
+          },
+          "article" : {
+            "type" : "string",
+            "example" : "Enim placeat dolor in impedit porro. Doloremque ex omnis totam dolorem aliquid. Nesciunt et eum molestiae et et officiis."
+          },
+          "authorId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Gif" : {
+        "required" : [ "imageUrl", "title" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "imageUrl" : {
+            "type" : "string",
+            "example" : "image/gif"
+          },
+          "title" : {
+            "type" : "string",
+            "example" : "Culpa assumenda amet."
+          },
+          "authorId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "signup_payload" : {
+        "required" : [ "address", "department", "email", "firstname", "gender", "jobRole", "lastname", "manufacturer", "password" ],
+        "type" : "object",
+        "properties" : {
+          "firstname" : {
+            "type" : "string",
+            "example" : "Nadia"
+          },
+          "lastname" : {
+            "type" : "string",
+            "example" : "Blanche"
+          },
+          "jobRole" : {
+            "type" : "string",
+            "example" : "Investor Optimization Supervisor"
+          },
+          "gender" : {
+            "type" : "string",
+            "example" : "male"
+          },
+          "department" : {
+            "type" : "string",
+            "example" : "Applications"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "6840 Reynold Extensions"
+          },
+          "email" : {
+            "type" : "string",
+            "example" : "Manuela61@hotmail.com"
+          },
+          "password" : {
+            "type" : "string",
+            "example" : "password"
+          }
+        }
+      },
+      "signin_payload" : {
+        "required" : [ "email", "password" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "example" : "Manuela61@hotmail.com"
+          },
+          "password" : {
+            "type" : "string",
+            "example" : "password"
+          }
+        }
+      },
+      "create_article_payload" : {
+        "required" : [ "article", "title" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "example" : "Quod necessitatibus recusandae"
+          },
+          "article" : {
+            "type" : "string",
+            "example" : "Enim placeat dolor in impedit porro. Doloremque ex omnis totam dolorem aliquid. Nesciunt et eum molestiae et et officiis."
+          }
+        }
+      },
+      "create_gif_payload" : {
+        "required" : [ "imageUrl", "title" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string",
+            "example" : "Quod necessitatibus recusandae"
+          },
+          "article" : {
+            "type" : "string",
+            "example" : "image/gif"
+          }
+        }
+      },
+      "inline_response_201" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "success"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/inline_response_201_data"
+          }
+        }
+      },
+      "inline_response_201_1" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "success"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Article"
+          }
+        }
+      },
+      "inline_response_201_2" : {
+        "type" : "object",
+        "properties" : {
+          "status" : {
+            "type" : "string",
+            "example" : "success"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Gif"
+          }
+        }
+      },
+      "inline_response_201_data" : {
+        "type" : "object",
+        "properties" : {
+          "user" : {
+            "$ref" : "#/components/schemas/User"
+          },
+          "token" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}

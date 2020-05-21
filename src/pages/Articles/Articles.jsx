@@ -1,15 +1,28 @@
 import React from 'react'
-
+import { selectArticleItems } from '../../redux/article/articles.selectors'
+import { createStructuredSelector } from 'reselect';
 import CustomButton from '../../component/custombutton/custombutton'
 import PostContainer from '../../component/post-container/post-container'
-const Articles = () => (
+import {connect} from 'react-redux'
+
+const Articles = ({ articles }) => (
   <div>
-    <div className="center" style ={{position: `fixed`, }}>
-      <CustomButton>Post Article</CustomButton>
+    <div className="center">
+      <CustomButton>New Article</CustomButton>
     </div>
     <hr />
-    <PostContainer />
-  </div>
+    {articles ?
+      (articles.map(article =>
+        <PostContainer article={article}
+         key={article.id} />
+      )) : <span className='empty-message'>
+        No Article to Display</span>
+    }
+    
+    </div>
 )
+const mapStateToProp = createStructuredSelector({
+  articles: selectArticleItems
+})
 
-export default Articles
+export default connect(selectArticleItems)(Articles)

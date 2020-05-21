@@ -1,10 +1,8 @@
-import {createSelector} from 'reselect'
+import { createSelector } from "reselect";
 
-const selectFeed = state => state.article
+const selectArticle = state => state.article;
 
-export const selectFeedItems = createSelector(
+export const selectArticleItems = createSelector(
   [selectArticle],
-  (article => article)
-)
-
-
+  article => article
+);
