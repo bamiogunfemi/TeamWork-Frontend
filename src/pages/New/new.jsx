@@ -2,9 +2,14 @@ import React, { useState } from 'react'
 import { useFirestore } from 'react-redux-firebase'
 import { useSelector } from 'react-redux';
 import { useHistory, Redirect, useLocation } from "react-router-dom";
+import { MdClear } from "react-icons/md";
+import './new.scss';
+import { Grid } from '@giphy/react-components'
+import { GiphyFetch } from '@giphy/js-fetch-api'
 
-import './new.scss'
-const New = () => {
+const gf = new GiphyFetch("4ktTKEOcAx28h9OemI1Av5dYTtGSP57t");
+
+const New = ({ close }) => {
   const firestore = useFirestore();
   const history = useHistory();
 
@@ -20,14 +25,15 @@ const New = () => {
     setCredentials({ ...newCredentials, [name]: value });
   };
 
-  const addNew = (postTitle, postContent) => {
+  const fetchGifs = (offset) => gf.trending({ offset, limit: 10 })
+  const addNew = (postContent) => {
 
     firestore
       .collection("users")
       .doc(uid)
       .collection("articles")
       .add({
-        postTitle: postTitle,
+
         postContent: postContent
 
       })
@@ -40,45 +46,46 @@ const New = () => {
         );
       });
 
-      setCredentials({
-        postTitle: '',
-        postContent: ''
-      });
+    setCredentials({
+
+      postContent: postContent
+    });
   };
 
 
   return (
 
-    <div className="form-container">
-      <form className="form">
-        <div className="label-input-container">
-          <label htmlFor="text">Title</label>
-          <input
-            type="text"
-            name="postTitle"
-            value={postTitle}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="label-input-container">
-          <textarea name="postContent" onChange={handleChange}
-            value={postContent} cols="37" rows="8">
+
+    <div className="modal">
+      <span className="close" alt='close' onClick={close}>
+        <MdClear />
+      </span>
+
+      <div className="content">
+        <form className="form">
+          <textarea name="postContent" rows="5" placeholder="What's Up?" className='textarea' onChange={handleChange}
+            value={postContent}>
           </textarea>
 
-        </div>
-        <button onClick={
+        </form>
+      </div>
+      <div className="actions">
+        <img alt='gif' className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" onClick={<Grid width={800} columns={3} fetchGifs={fetchGifs} />} />
+        <button class='post-button' onClick={
           (e) => {
             e.preventDefault();
             addNew(postTitle, postContent)
           }
-          
+
         }>
-          Post New Article
-        </button>
-      </form>
+          Post
+          </button>
+
+      </div>
     </div>
 
-  )
+
+  );
 }
 export default New
 

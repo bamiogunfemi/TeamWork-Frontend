@@ -7,6 +7,9 @@ import { IoIosLogOut } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useFirebase } from "react-redux-firebase";
+import Popup from "reactjs-popup";
+
+import New from '../../pages/New/new';
 
 function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
   const { firstName, lastName, jobRole } = useSelector(
@@ -66,12 +69,22 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
                 GIFs
               </MenuItem>
           </NavLink>
-          <NavLink to="/dashboard/new" activeClassName="active-dashboard-link">
-            <MenuItem>
-              <MdAdd className="menu-icon icon" />
-               New
-              </MenuItem>
-          </NavLink>
+
+
+          <MenuItem>
+            <Popup modal trigger={
+
+              <button className='nav-button'> <MdAdd className="menu-icon icon" />
+             New</button>
+            }>
+              {close => <New close={close} />}
+            </Popup>
+          </MenuItem>
+
+
+
+
+
         </div>
         <IoIosLogOut className="exit-icon icon" onClick={() => firebase.logout()} />
       </div>
