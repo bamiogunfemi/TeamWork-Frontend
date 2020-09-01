@@ -17,7 +17,7 @@ const Dashboard = () => {
 
 
       <div className="dashboard-body ">
-        <div class="hamburger-icon" onClick={
+        <div className="hamburger-icon" onClick={
           () => {
             setisSideBarOpenOnMobile(!isSideBarOpenOnMobile);
           }

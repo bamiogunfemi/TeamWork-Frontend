@@ -14,16 +14,22 @@ const New = ({ close }) => {
   const history = useHistory();
   const [modalGif, setModalGif] = useState();
   const { uid } = useSelector((state) => state.firebase.auth);
+  const { firstName, lastName } = useSelector(
+    (state) => state.firebase.profile
+  );
+  let fullName = firstName + ' ' + lastName;
 
-  const [newCredentials, setCredentials] = useState({
-    postTitle: '',
+  const [newPost, setPost] = useState({
     postContent: ''
   });
-  const { postTitle, postContent } = newCredentials;
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...newCredentials, [name]: value });
+  const { postContent } = newPost;
+  const handleChange = ({ currentTarget: { name, value } }) => {
+    if (name === "postContent") {
+      setPost(value);
+
+    }
   };
+
   function GridDemo({ onGifClick }) {
     const fetchGifs = (offset) =>
       giphyFetch.trending({ offset, limit: 10 });
@@ -39,42 +45,36 @@ const New = ({ close }) => {
   }
   const fetchGifs = (offset) => giphyFetch.trending({ offset, limit: 50 })
   const addNew = (postContent) => {
-
     firestore
       .collection("users")
       .doc(uid)
       .collection("articles")
       .add({
-
-        postContent: postContent
-
+        author: fullName,
+        postContent: newPost,
+        date: new Date().toLocaleDateString()
       })
       .then((docRef) => {
         docRef.update(
           {
             articleID: docRef.id
           }
-
         );
       });
-
-    setCredentials({
-
-      postContent: postContent
-    });
+    // setPost("");
   };
 
 
   return (
 
     <div className="">
-     <GridDemo
+      {/* <GridDemo
         onGifClick={(gif) => {
           console.log("gif", gif);
-          
-          
+
+
         }}
-      />
+      /> */}
 
       <div className="modal">
         <span className="close" alt='close' onClick={close}>
@@ -83,36 +83,35 @@ const New = ({ close }) => {
 
         <div className="content">
           <form className="form">
-            <textarea name="postContent" rows="5" placeholder="What's Up?" className='textarea' onChange={handleChange}
+            <textarea name="postContent"
+              rows="5" placeholder="What's Up?" className='textarea' onChange={handleChange}
               value={postContent}>
             </textarea>
-
           </form>
         </div>
         <div className="actions">
-          <button onClick={
-               <GridDemo
-               onGifClick={(gif, e) => {
-                 console.log("gif", gif);
-                 e.preventDefault();
-                 setModalGif(gif);
-               }}
-             />
+          <button onClick={() =>
+            <GridDemo
+              onGifClick={(gif, e) => {
+                console.log("gif", gif);
+                e.preventDefault();
+                setModalGif(gif);
+              }}
+            />
           } > <img alt='gif' className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" /></button>
           <button class='post-button' onClick={
-            (e) => {
-              e.preventDefault();
-              addNew(postTitle, postContent)
-            }
-
-          }>
+            (event) => {
+              event.preventDefault();
+              addNew(postContent)
+              close()
+            }}>
             Post
           </button>
 
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }
 export default New
