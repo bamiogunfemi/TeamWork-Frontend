@@ -1,11 +1,17 @@
 import React, { useState, Suspense, useSelector } from "react";
 import "./authentication.scss";
+import { Link } from 'react-router-dom';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
 import Loader from '../../component/loader/loader'
 import { isLoaded } from 'react-redux-firebase'
 
 const SignUp = () => {
+  const history = useHistory();
+  const firebase = useFirebase();
+  const auth = useSelector((state) => state.firebase.auth);
+  const error = useSelector(state => state.firebase.authError)
+
   const [signUpCredentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -24,13 +30,9 @@ const SignUp = () => {
     email,
     confirmPassword,
     jobRole,
-    gender,
-    address,
+
   } = signUpCredentials;
 
-  const history = useHistory();
-  const firebase = useFirebase();
-  const auth = useSelector(state => state.firebase.auth)
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,6 +40,14 @@ const SignUp = () => {
 
     if (password !== confirmPassword) {
       alert("passwords do not match");
+    }
+    else if (firstName === '' ||
+      lastName === '' ||
+      password === '' ||
+      email === '' ||
+      confirmPassword === '' ||
+      jobRole) {
+      alert('All fields are required')
     } else {
       firebase
         .createUser(
@@ -46,8 +56,7 @@ const SignUp = () => {
             firstName,
             lastName,
             jobRole,
-            gender,
-            address,
+
           }
         )
         .then(() => {
@@ -67,7 +76,8 @@ const SignUp = () => {
       <h1>Sign Up</h1>
 
       <form className="form">
-        <Suspense callback={<Loader />}>
+        <p>{error && error.message}</p>
+        {/* <Suspense callback={<Loader />}> */}
           <div className="label-input-container">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -111,44 +121,9 @@ const SignUp = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="label-input-container">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              name="address"
-              required
-              id="address"
-              value={address}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input-container w-100">
-            <label onChange={handleChange} value={gender} htmlFor="gender">
-              Gender
-          </label>
-            <div className="gender-container">
-              <div>
-                <input
-                  type="radio"
-                  id="male"
-                  value="male"
-                  defaultChecked
-                  name="gender"
-                />
-                <label htmlFor="male">Male</label>
-              </div>
 
-              <div>
-                <input type="radio" value="female" id="female" name="gender" />
-                <label htmlFor="female">Female</label>
-              </div>
 
-              <div>
-                <input type="radio" value="others" id="others" name="gender" />
-                <label htmlFor="others">Others</label>
-              </div>
-            </div>
-          </div>
+
           <div className="label-input-container">
             <label htmlFor="password">Password:</label>
             <input
@@ -171,9 +146,10 @@ const SignUp = () => {
             />
           </div>
           <button className="email-button" onClick={handleSubmit}>
-            Sign up with email
+            Sign up
         </button>
-        </Suspense>
+          <p>Already have an account? <span><Link to='/'> Login</Link></span></p>
+        {/* </Suspense> */}
       </form>
     </div>
   );
