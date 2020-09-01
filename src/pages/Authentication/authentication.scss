@@ -1,11 +1,12 @@
 .form-container {
   margin: 0 auto;
 
-  h1{
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 500;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
   }
+
   .form {
     border: 1px solid #afafaf;
     padding: 2rem;
@@ -20,18 +21,19 @@
       margin: 1rem 0;
       width: 100%;
 
-      > label {
+      >label {
         display: block;
         font-size: 1.1rem;
         margin-bottom: 0.5rem;
       }
 
-      > input {
+      >input {
         border-radius: 2px;
         border: 1px solid #afafaf;
         transition: box-shadow 0.15s ease-in-out;
 
         width: 100%;
+
         &:focus {
           outline: 0;
           box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
@@ -39,39 +41,41 @@
       }
     }
 
-    button{
-        margin: 1rem 0;
-        width: 100%;
-        padding: 0.5rem 1rem;
-        background-color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: box-shadow 1s;
-        
+    button {
+      margin: 1rem 0;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background-color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: box-shadow 1s;
 
-        &.email-button{
-            box-shadow: 0px 0em 0.1px 0 #1b1a72 inset;
-            border: 1px solid #1b1a72;
-            color: #1b1a72;
-            &:hover{
-                box-shadow: 500px 0em 0.1px 0 #1b1a72 inset;
-                color: white;
-            }
-        }
 
-        &.google-button{
-            box-shadow: 0px 0em 0.1px 0 #f56565 inset;
-            border: 1px solid #f56565;
-            color: #f56565;
-            &:hover{
-                box-shadow: 500px 0em 0.1px 0 #f56565 inset;
-                color: white;
-            }
+      &.email-button {
+        box-shadow: 0px 0em 0.1px 0 white inset;
+        border: 1px solid #1b1a72;
+        color: white;
+
+        &:hover {
+          box-shadow: 500px 0em 0.1px 0 #1b1a72 inset;
+          color: white;
         }
+      }
+
+      &.google-button {
+        box-shadow: 0px 0em 0.1px 0 #f56565 inset;
+        border: 1px solid #f56565;
+        color: #f56565;
+
+        &:hover {
+          box-shadow: 500px 0em 0.1px 0 #f56565 inset;
+          color: white;
+        }
+      }
 
     }
 
-    .gender-container{
+    .gender-container {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;

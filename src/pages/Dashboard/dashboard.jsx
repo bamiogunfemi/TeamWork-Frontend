@@ -4,7 +4,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Articles from "../Articles/Articles";
 import Feed from "../Feed/feed";
 import Sidebar from "../../component/sidebar/sidebar";
-import Gifs from "../Gifs/Gifs";
+import Gifs from "../Gifs/Gif";
 import New from '../New/new.jsx'
 const Dashboard = () => {
   const match = useRouteMatch();

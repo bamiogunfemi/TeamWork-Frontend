@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./authentication.scss";
+import { Link } from 'react-router-dom';
 import { useFirebase } from "react-redux-firebase";
 import { useHistory, Redirect, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -9,7 +10,8 @@ import Loader from "react-loader-spinner";
 const SignIn = () => {
   const auth = useSelector((state) => state.firebase.auth);
   const location = useLocation();
-
+  const error = useSelector(state => state.firebase.authError)
+  
   const [userCredentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -23,28 +25,26 @@ const SignIn = () => {
     const { name, value } = e.target;
     setCredentials({ ...userCredentials, [name]: value });
   };
-  const signInWithGoogle = () => {
-    firebase
-      .login({
-        provider: "google",
-        type: "popup",
-      })
-      .then(() => {
-        history.push("/dashboard");
-      });
-  };
 
-  const signInWithEmailAndPassword = () => {
-    firebase
-      .login({
-        email: email,
-        password: password,
-      })
-      .then(() => {
-        history.push("/dashboard");
-      });
-  };
-
+  const signInWithEmailAndPassword = (email, password) => {
+    if (email === '' || password === '') {
+      alert(
+        'Kindly fill All fields'
+      )
+    } else {
+      firebase
+        .login({
+          email: email,
+          password: password,
+        })
+        .then(() => {
+          history.push("/dashboard");
+        })
+        // .catch((e) => {
+        //   console.log(e, e.message, 'error')
+        // })
+    }
+  }
   if (!isLoaded(auth) && isEmpty(auth)) {
     return (
       <Loader
@@ -67,18 +67,20 @@ const SignIn = () => {
       />
     );
   }
+
   return (
     <div className="form-container">
       <h1>Sign In</h1>
       <form className="form">
+        <p>{error && error.message}</p>
         <div className="label-input-container">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             name="email"
-            id=""
             value={email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="label-input-container">
@@ -86,9 +88,9 @@ const SignIn = () => {
           <input
             type="password"
             name="password"
-            id=""
             value={password}
             onChange={handleChange}
+            required
           />
         </div>
         <button
@@ -98,17 +100,16 @@ const SignIn = () => {
             signInWithEmailAndPassword(email, password);
           }}
         >
-          Sign in with email
+          {(!isLoaded(auth)) ? (<Loader
+            type="Puff"
+            color="#1b1a72"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />) : 'Sign in'}
         </button>
-        <button
-          className="google-button"
-          onClick={(e) => {
-            e.preventDefault();
-            signInWithGoogle();
-          }}
-        >
-          Sign in with Google
-        </button>
+        <p>Don't have an account? <span><Link to='/signup'> Sign Up</Link></span></p>
+
       </form>
     </div>
   );
