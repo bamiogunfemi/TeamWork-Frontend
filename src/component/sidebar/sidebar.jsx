@@ -54,22 +54,7 @@ function Sidebar({ isSideBarOpenOnMobile, closeSideBar }) {
               <FaClone className="menu-icon icon" /> Feed
             </MenuItem>
           </NavLink>
-          <NavLink
-            to="/dashboard/articles"
-            activeClassName="active-dashboard-link"
-          >
-            <MenuItem>
-              <FaListUl className="menu-icon icon" />
-              Articles
-            </MenuItem>
-          </NavLink>
-          <NavLink to="/dashboard/gifs" activeClassName="active-dashboard-link">
-            <MenuItem>
-              <MdGif className="menu-icon icon" />
-                GIFs
-              </MenuItem>
-          </NavLink>
-
+          
 
           <MenuItem>
             <Popup modal trigger={
