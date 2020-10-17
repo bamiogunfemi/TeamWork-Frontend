@@ -1,8 +1,8 @@
 import React from 'react'
 import { FaCommentAlt, FaTrash, FaEdit } from 'react-icons/fa';
 
-const PostContainer = ({author,post,icons}) => (
- 
+const PostContainer = ({ feed: { date, author, postContent, icons } }) => (
+
   <div className="">
     <article className="mw8 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10 shadow-5">
       <div className="tc">
@@ -10,16 +10,15 @@ const PostContainer = ({author,post,icons}) => (
         <h1 className="f4">{author}</h1>
       </div>
       <div className="tc">
-        <p className="lh-copy measure center f6 black-70">
-          {post}
-  </p>
+        <p className="lh-copy measure center f3 black-70">
+          {postContent}
+        </p>
       </div>
 
-      <div className="" style={{display:'flex', justifyContent:'flex-end'}}>
-       
-        <FaCommentAlt />
-       
-        </div>
+      <div className="" style={{ textAlign: 'end' }}>
+
+        <p class='f5'>{date}</p>
+      </div>
 
     </article>
 
