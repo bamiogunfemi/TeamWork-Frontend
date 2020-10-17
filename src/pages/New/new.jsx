@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import { useFirestore } from 'react-redux-firebase'
 import { useSelector } from 'react-redux';
-import { useHistory, Redirect, useLocation } from "react-router-dom";
+// import { useHistory, Redirect, useLocation } from "react-router-dom";
 import { MdClear } from "react-icons/md";
 import './new.scss';
-import { Grid, Gif } from '@giphy/react-components'
+import { Grid, 
+  // Gif
+ } from '@giphy/react-components'
 import { GiphyFetch } from '@giphy/js-fetch-api'
 
 const giphyFetch = new GiphyFetch("4ktTKEOcAx28h9OemI1Av5dYTtGSP57t");
 
 const New = ({ close }) => {
   const firestore = useFirestore();
-  const history = useHistory();
+
   const [modalGif, setModalGif] = useState();
   const { uid } = useSelector((state) => state.firebase.auth);
   const { firstName, lastName } = useSelector(
@@ -94,14 +96,17 @@ const New = ({ close }) => {
               onGifClick={(gif, e) => {
                 console.log("gif", gif);
                 e.preventDefault();
+
                 setModalGif(gif);
+
               }}
             />
-          } > <img alt='gif' className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" alt="gif" /></button>
+          } > <img alt="gif" className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" /></button>
           <button class='post-button' onClick={
             (event) => {
               event.preventDefault();
               addNew(postContent)
+              window.location.href = "/dashboard"
               close()
             }}>
             Post
