@@ -14,7 +14,7 @@ const giphyFetch = new GiphyFetch("4ktTKEOcAx28h9OemI1Av5dYTtGSP57t");
 const New = ({ close }) => {
   const firestore = useFirestore();
 
-  const [modalGif, setModalGif] = useState();
+  // const [modalGif, setModalGif] = useState();
   const { uid } = useSelector((state) => state.firebase.auth);
   const { firstName, lastName } = useSelector(
     (state) => state.firebase.profile
@@ -45,7 +45,7 @@ const New = ({ close }) => {
       />
     );
   }
-  const fetchGifs = (offset) => giphyFetch.trending({ offset, limit: 50 })
+  // const fetchGifs = (offset) => giphyFetch.trending({ offset, limit: 50 })
   const addNew = (postContent) => {
     firestore
       .collection("articles")
@@ -69,13 +69,13 @@ const New = ({ close }) => {
   return (
 
     <div className="">
-      {/* <GridDemo
+      <GridDemo
         onGifClick={(gif) => {
           console.log("gif", gif);
 
 
         }}
-      /> */}
+      />
 
       <div className="modal">
         <span className="close" alt='close' onClick={close}>
@@ -97,7 +97,7 @@ const New = ({ close }) => {
                 console.log("gif", gif);
                 e.preventDefault();
 
-                setModalGif(gif);
+                // setModalGif(gif);
 
               }}
             />

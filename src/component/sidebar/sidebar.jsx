@@ -1,8 +1,12 @@
 import React from "react";
 import "./sidebar.scss";
 import MenuItem from "../menu-item/menu-item";
-import { FaClone, FaListUl } from "react-icons/fa";
-import { MdGif, MdAdd } from "react-icons/md";
+import { FaClone, 
+  // FaListUl
+ } from "react-icons/fa";
+import { 
+  // MdGif,
+   MdAdd } from "react-icons/md";
 import { IoIosLogOut } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
