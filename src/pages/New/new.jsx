@@ -46,12 +46,11 @@ const New = ({ close }) => {
   const fetchGifs = (offset) => giphyFetch.trending({ offset, limit: 50 })
   const addNew = (postContent) => {
     firestore
-      .collection("users")
-      .doc(uid)
       .collection("articles")
       .add({
         author: fullName,
         postContent: newPost,
+        uid: uid,
         date: new Date().toLocaleDateString()
       })
       .then((docRef) => {
@@ -98,7 +97,7 @@ const New = ({ close }) => {
                 setModalGif(gif);
               }}
             />
-          } > <img alt='gif' className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" /></button>
+          } > <img alt='gif' className='gif-icon' src="https://img.icons8.com/ios/40/000000/gif.png" alt="gif" /></button>
           <button class='post-button' onClick={
             (event) => {
               event.preventDefault();
