@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useSelector } from "react";
+import React, { useState, useSelector } from "react";
 import "./authentication.scss";
 import { Link } from 'react-router-dom';
 import { useFirebase } from "react-redux-firebase";

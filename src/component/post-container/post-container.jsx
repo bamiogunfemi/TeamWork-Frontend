@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaCommentAlt, FaTrash, FaEdit } from 'react-icons/fa';
+// import { FaCommentAlt, FaTrash, FaEdit } from 'react-icons/fa';
 
 const PostContainer = ({ feed: { date, author, postContent, icons } }) => (
 
