@@ -1,4 +1,4 @@
-import React, { useState, useSelector } from "react";
+import React, { useState, useSelector, Suspense } from "react";
 import "./authentication.scss";
 import { Link } from 'react-router-dom';
 import { useFirebase } from "react-redux-firebase";
@@ -9,19 +9,17 @@ import { isLoaded } from 'react-redux-firebase'
 const SignUp = () => {
   const history = useHistory();
   const firebase = useFirebase();
-  const auth = useSelector((state) => state.firebase.auth);
-  const error = useSelector(state => state.firebase.authError)
-
+  // const auth = useSelector((state) => state.firebase.auth);
+  // const errors = useSelector(state => state.firebase.authError)
+  const [error, setError] = useState('');
   const [signUpCredentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    jobRole: "",
-    dept: "",
-    gender: "",
-    address: "",
+
+
   });
   const {
     firstName,
@@ -29,25 +27,24 @@ const SignUp = () => {
     password,
     email,
     confirmPassword,
-    jobRole,
+
 
   } = signUpCredentials;
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!isLoaded(auth)) return <Loader />;
+    // if (!isLoaded(auth)) return <Loader />;
 
     if (password !== confirmPassword) {
-      alert("passwords do not match");
+      setError("passwords do not match");
     }
     else if (firstName === '' ||
       lastName === '' ||
       password === '' ||
       email === '' ||
-      confirmPassword === '' ||
-      jobRole) {
-      alert('All fields are required')
+      confirmPassword === '') {
+      setError('All fields are required')
     } else {
       firebase
         .createUser(
@@ -55,7 +52,7 @@ const SignUp = () => {
           {
             firstName,
             lastName,
-            jobRole,
+
 
           }
         )
@@ -64,9 +61,10 @@ const SignUp = () => {
         });
     }
   };
-
+  console.log(error)
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setError('')
     setCredentials({ ...signUpCredentials, [name]: value });
 
   };
@@ -76,8 +74,8 @@ const SignUp = () => {
       <h1>Sign Up</h1>
 
       <form className="form">
-        <p>{error && error.message}</p>
-        {/* <Suspense callback={<Loader />}> */}
+        <p>{error}</p>
+        <Suspense callback={<Loader />}>
           <div className="label-input-container">
             <label htmlFor="firstName">First Name</label>
             <input
@@ -100,6 +98,7 @@ const SignUp = () => {
               onChange={handleChange}
             />
           </div>
+
           <div className="label-input-container">
             <label htmlFor="email">Email:</label>
             <input
@@ -110,18 +109,6 @@ const SignUp = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="label-input-container">
-            <label htmlFor="jobRole">Job Role</label>
-            <input
-              type="text"
-              name="jobRole"
-              required
-              id="jobRole"
-              value={jobRole}
-              onChange={handleChange}
-            />
-          </div>
-
 
 
           <div className="label-input-container">
@@ -149,7 +136,7 @@ const SignUp = () => {
             Sign up
         </button>
           <p>Already have an account? <span><Link to='/'> Login</Link></span></p>
-        {/* </Suspense> */}
+        </Suspense>
       </form>
     </div>
   );
